@@ -4,6 +4,8 @@ Secure Notes is a privacy-focused Windows journal and notebook application that 
 
 Built on open standards, Secure Notes gives you full ownership of your data. Your vault can be accessed using many compatible KeePass applications, ensuring you are never locked into a proprietary format.
 
+<img src="Screenshots/DiaryEditor.png">
+
 ## Features
 
 ### Multiple Books
@@ -81,11 +83,24 @@ Supported exports:
 * Windows 10 or later
 * 64-bit operating system
 
-### Installation Platforms
+## Installation Platforms
 
-| Windows | Android (Coming Soon) |
-|--------|------------------------|
-| [![Windows Download](Screenshots/Windows.png)]([https://github.com/yourrepo/releases/latest](https://github.com/dzn-tech/SecureNotesWindows/releases/download/v1.0.2/SecureNotesInstaller.msi)) | ![Android Coming Soon](Screenshots/Android.png) |
+<table>
+  <tr>
+    <th>Windows</th>
+    <th>Android (Coming Soon)</th>
+  </tr>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/dzn-tech/SecureNotesWindows/releases/download/v1.0.2/SecureNotesInstaller.msi">
+        <img src="Screenshots/Windows.png" alt="Windows Download" width="200"/>
+      </a>
+    </td>
+    <td align="center">
+      <img src="Screenshots/Android.png" alt="Android Coming Soon" width="200"/>
+    </td>
+  </tr>
+</table>
 
 ### Notes
 
