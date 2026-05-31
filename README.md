@@ -81,15 +81,16 @@ Supported exports:
 * Windows 10 or later
 * 64-bit operating system
 
-## Installation
+### Installation Platforms
 
-Download the latest installer from the Releases page and run:
+| Windows | Android (Coming Soon) |
+|--------|------------------------|
+| [![Windows Download](Screenshots/Windows.png)]([https://github.com/yourrepo/releases/latest](https://github.com/dzn-tech/SecureNotesWindows/releases/download/v1.0.2/SecureNotesInstaller.msi)) | ![Android Coming Soon](Screenshots/Android.png) |
 
-```text
-SecureNotesInstaller.msi
-```
+### Notes
 
-Follow the installation wizard to complete setup.
+- Windows version is currently available via GitHub Releases
+- Android support is planned for a future release
 
 ## Building from Source
 
