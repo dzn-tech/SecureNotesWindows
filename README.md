@@ -4,6 +4,8 @@ Secure Notes is a privacy-focused Windows journal and notebook application that 
 
 Built on open standards, Secure Notes gives you full ownership of your data. Your vault can be accessed using many compatible KeePass applications, ensuring you are never locked into a proprietary format.
 
+<img src="Screenshots/DiaryEditor.png">
+
 ## Features
 
 ### Multiple Books
