@@ -22,7 +22,7 @@ Create and manage:
 
 ### Secure Photo Storage
 
-Store photos and attachments directly inside your encrypted vault.
+Store photos directly inside your encrypted vault, attached to any new entry.
 
 All attachments are encrypted alongside your notes and journal entries.
 
@@ -44,7 +44,6 @@ Currently localised in 10 languages, with additional translations planned.
 Secure Notes uses modern security standards:
 
 * AES-256 database encryption
-* Argon2d key derivation
 * HMAC-SHA256 integrity protection
 * Encrypted attachments and photos
 
@@ -114,7 +113,17 @@ dotnet publish -c Release -r win-x64 --self-contained true
 
 ## Screenshots
 
-Screenshots can be found in the repository documentation and release pages.
+| Lock Screen | Settings |
+|------------|------------|
+| <img src="Screenshots/LockScreen.png" width="450"> | <img src="Screenshots/Settings.png" width="450"> |
+
+| Diary View | Notebook View |
+|------------|------------|
+| <img src="Screenshots/DiaryEditor.png" width="450"> | <img src="Screenshots/NoteEditor.png" width="450"> |
+
+| Paper White Theme | Dark Mode Theme  |
+|------------|------------|
+| <img src="Screenshots/PaperWhite.png" width="450"> | <img src="Screenshots/DarkMode.png" width="450"> |
 
 ## Important Compatibility Notice
 
