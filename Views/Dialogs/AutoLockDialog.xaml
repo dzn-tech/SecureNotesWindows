@@ -1,0 +1,74 @@
+<Window x:Class="SecureNotesWin.Views.Dialogs.AutoLockDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Auto-Lock Timeout" Height="340" Width="340"
+        WindowStartupLocation="CenterOwner" ResizeMode="NoResize"
+        Background="{DynamicResource BackgroundBrush}">
+    <StackPanel Margin="28">
+        <TextBlock Text="Auto-Lock Timeout" FontSize="17" FontWeight="SemiBold"
+                   Foreground="{DynamicResource TextPrimaryBrush}" Margin="0,0,0,6" Name="AutoLockTimeout"/>
+        <TextBlock Text="Lock vault after inactivity" FontSize="12"
+                   Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,0,0,20" Name ="LockAfterInactivity"/>
+
+        <!-- Minutes : Seconds spinner matching Android design -->
+        <Grid HorizontalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="100"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Minutes -->
+            <StackPanel Grid.Column="0" HorizontalAlignment="Center">
+                <TextBlock Text="Minutes" FontSize="11" Foreground="{DynamicResource TextSecondaryBrush}"
+                           HorizontalAlignment="Center" Margin="0,0,0,4" Name="Minutes"/>
+                <Button Content="▲" Width="40" Height="28" Background="Transparent"
+                        BorderThickness="0" Foreground="{DynamicResource AccentBrush}"
+                        FontSize="14" Cursor="Hand" Click="MinUp_Click"/>
+                <TextBlock x:Name="MinLabel" Text="01" FontSize="36" FontWeight="Bold"
+                           Foreground="{DynamicResource TextPrimaryBrush}" HorizontalAlignment="Center"/>
+                <Button Content="▼" Width="40" Height="28" Background="Transparent"
+                        BorderThickness="0" Foreground="{DynamicResource AccentBrush}"
+                        FontSize="14" Cursor="Hand" Click="MinDown_Click"/>
+            </StackPanel>
+
+            <!-- Colon -->
+            <TextBlock Grid.Column="1" Text=":" FontSize="36" FontWeight="Bold"
+                       Foreground="{DynamicResource TextPrimaryBrush}"
+                       VerticalAlignment="Center" Margin="8,10,8,0"/>
+
+            <!-- Seconds -->
+            <StackPanel Grid.Column="2" HorizontalAlignment="Center">
+                <TextBlock Text="Seconds" FontSize="11" Foreground="{DynamicResource TextSecondaryBrush}"
+                           HorizontalAlignment="Center" Margin="0,0,0,4" Name="Seconds"/>
+                <Button Content="▲" Width="40" Height="28" Background="Transparent"
+                        BorderThickness="0" Foreground="{DynamicResource AccentBrush}"
+                        FontSize="14" Cursor="Hand" Click="SecUp_Click"/>
+                <TextBlock x:Name="SecLabel" Text="00" FontSize="36" FontWeight="Bold"
+                           Foreground="{DynamicResource TextPrimaryBrush}" HorizontalAlignment="Center"/>
+                <Button Content="▼" Width="40" Height="28" Background="Transparent"
+                        BorderThickness="0" Foreground="{DynamicResource AccentBrush}"
+                        FontSize="14" Cursor="Hand" Click="SecDown_Click"/>
+            </StackPanel>
+        </Grid>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
+            <Button Content="Cancel" Padding="18,8" Margin="0,0,10,0"
+                    Style="{DynamicResource SecondaryButtonStyle}"
+Foreground="{DynamicResource TextSecondaryBrush}"
+                    BorderThickness="0" Cursor="Hand" FontSize="13"
+                    Click="BtnCancel_Click" Name="BtnCancel">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="16"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <Button Content="Save" Style="{DynamicResource PrimaryButtonStyle}"
+                    Padding="18,8" Click="BtnSave_Click" Name="BtnSave"/>
+        </StackPanel>
+    </StackPanel>
+</Window>

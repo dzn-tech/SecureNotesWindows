@@ -1,0 +1,285 @@
+<Window x:Class="SecureNotesWin.Views.Dialogs.SettingsDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:loc="clr-namespace:SecureNotesWin.Localization"
+        Title="{loc:Loc settings}" Height="580" Width="500"
+        WindowStartupLocation="CenterOwner" ResizeMode="NoResize"
+        Background="{DynamicResource BackgroundBrush}">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="0,0,0,24">
+
+            <TextBlock Text="{loc:Loc settings}" FontSize="20" FontWeight="Bold"
+                       Foreground="{DynamicResource TextPrimaryBrush}" Margin="24,20,24,16"/>
+
+            <!-- APPEARANCE -->
+            <TextBlock Text="{loc:Loc appearance}" FontSize="10" FontWeight="Bold"
+                       Foreground="{DynamicResource AccentBrush}" Margin="24,8,24,6"/>
+
+            <Button Click="ThemeRow_Click"
+        Background="Transparent"
+        BorderThickness="0"
+        Padding="0"
+        Cursor="Hand"
+        HorizontalAlignment="Stretch"
+        HorizontalContentAlignment="Stretch">
+                <Border Background="{DynamicResource CardBrush}"
+            CornerRadius="10"
+            Margin="16,0,16,2"
+            Padding="16,14">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Width="36" Height="36" CornerRadius="10" Background="{DynamicResource SurfaceBrush}" Margin="0,0,12,0">
+                            <TextBlock Text="🎨" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                            <TextBlock Text="{loc:Loc theme}" FontSize="13" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}"/>
+                            <TextBlock x:Name="ThemeSubtitle" FontSize="11" Foreground="{DynamicResource TextSecondaryBrush}"/>
+                        </StackPanel>
+                        <TextBlock Grid.Column="2" Text="›" FontSize="18" Foreground="{DynamicResource TextSecondaryBrush}" VerticalAlignment="Center"/>
+                    </Grid>
+                </Border>
+            </Button>
+
+            <Button Click="LanguageRow_Click"
+        Background="Transparent"
+        BorderThickness="0"
+        Padding="0"
+        Cursor="Hand"
+        HorizontalAlignment="Stretch"
+        HorizontalContentAlignment="Stretch">
+                <Border Background="{DynamicResource CardBrush}"
+            CornerRadius="10"
+            Margin="16,0,16,2"
+            Padding="16,14">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Width="36" Height="36" CornerRadius="10" Background="{DynamicResource SurfaceBrush}" Margin="0,0,12,0">
+                            <TextBlock Text="🌐" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                            <TextBlock Text="{loc:Loc language}" FontSize="13" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}"/>
+                            <TextBlock x:Name="LanguageSubtitle" FontSize="11" Foreground="{DynamicResource TextSecondaryBrush}"/>
+                        </StackPanel>
+                        <TextBlock Grid.Column="2" Text="›" FontSize="18" Foreground="{DynamicResource TextSecondaryBrush}" VerticalAlignment="Center"/>
+                    </Grid>
+                </Border>
+            </Button>
+
+            <!-- GENERAL -->
+            <TextBlock Text="{loc:Loc general}" FontSize="10" FontWeight="Bold"
+                       Foreground="{DynamicResource AccentBrush}" Margin="24,8,24,6"/>
+
+
+
+            <Button Click="DateFormatRow_Click"
+        Background="Transparent"
+        BorderThickness="0"
+        Padding="0"
+        Cursor="Hand"
+        HorizontalAlignment="Stretch"
+        HorizontalContentAlignment="Stretch">
+                <Border Background="{DynamicResource CardBrush}"
+            CornerRadius="10"
+            Margin="16,0,16,2"
+            Padding="16,14">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Width="36" Height="36" CornerRadius="10" Background="{DynamicResource SurfaceBrush}" Margin="0,0,12,0">
+                            <TextBlock Text="📅" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                            <TextBlock Text="{loc:Loc date_format}" FontSize="13" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}"/>
+                            <TextBlock x:Name="DateFormatSubtitle" FontSize="11" Foreground="{DynamicResource TextSecondaryBrush}"/>
+                        </StackPanel>
+                        <TextBlock Grid.Column="2" Text="›" FontSize="18" Foreground="{DynamicResource TextSecondaryBrush}" VerticalAlignment="Center"/>
+                    </Grid>
+                </Border>
+            </Button>
+
+            <Button Click="TimeFormatRow_Click"
+        Background="Transparent"
+        BorderThickness="0"
+        Padding="0"
+        Cursor="Hand"
+        HorizontalAlignment="Stretch"
+        HorizontalContentAlignment="Stretch">
+                <Border Background="{DynamicResource CardBrush}"
+            CornerRadius="10"
+            Margin="16,0,16,2"
+            Padding="16,14">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Border Width="36" Height="36" CornerRadius="10" Background="{DynamicResource SurfaceBrush}" Margin="0,0,12,0">
+                        <TextBlock Text="🕐" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                        <TextBlock Text="{loc:Loc time_format}" FontSize="13" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}"/>
+                        <TextBlock x:Name="TimeFormatSubtitle" FontSize="11" Foreground="{DynamicResource TextSecondaryBrush}"/>
+                    </StackPanel>
+                    <TextBlock Grid.Column="2" Text="›" FontSize="18" Foreground="{DynamicResource TextSecondaryBrush}" VerticalAlignment="Center"/>
+                </Grid>
+                </Border>
+            </Button>
+
+            <!-- SECURITY -->
+            <TextBlock Text="{loc:Loc security}" FontSize="10" FontWeight="Bold"
+                       Foreground="{DynamicResource AccentBrush}" Margin="24,8,24,6"/>
+
+            <Border Background="{DynamicResource CardBrush}" CornerRadius="10" Margin="16,0,16,2" Padding="16,14"
+                    Cursor="Hand" MouseLeftButtonUp="AutoLockRow_Click">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Border Width="36" Height="36" CornerRadius="10" Background="{DynamicResource SurfaceBrush}" Margin="0,0,12,0">
+                        <TextBlock Text="⏱" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                        <TextBlock Text="{loc:Loc auto_lock}" FontSize="13" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}"/>
+                        <TextBlock x:Name="AutoLockSubtitle" FontSize="11" Foreground="{DynamicResource TextSecondaryBrush}"/>
+                    </StackPanel>
+                    <TextBlock Grid.Column="2" Text="›" FontSize="18" Foreground="{DynamicResource TextSecondaryBrush}" VerticalAlignment="Center"/>
+                </Grid>
+            </Border>
+
+            <Border Background="{DynamicResource CardBrush}" CornerRadius="10" Margin="16,2,16,8" Padding="16,14"
+                    Cursor="Hand" MouseLeftButtonUp="ChangePasswordRow_Click">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Border Width="36" Height="36" CornerRadius="10" Background="{DynamicResource SurfaceBrush}" Margin="0,0,12,0">
+                        <TextBlock Text="🔑" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                        <TextBlock Text="{loc:Loc change_password}" FontSize="13" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}"/>
+                        <TextBlock Text="{loc:Loc update_vault_password}" FontSize="11" Foreground="{DynamicResource TextSecondaryBrush}"/>
+                    </StackPanel>
+                    <TextBlock Grid.Column="2" Text="›" FontSize="18" Foreground="{DynamicResource TextSecondaryBrush}" VerticalAlignment="Center"/>
+                </Grid>
+            </Border>
+
+            <!-- IMPORT & EXPORT -->
+            <TextBlock Text="{loc:Loc import_export}" FontSize="10" FontWeight="Bold"
+                       Foreground="{DynamicResource AccentBrush}" Margin="24,8,24,6"/>
+
+            <Border Background="{DynamicResource CardBrush}" CornerRadius="10" Margin="16,0,16,2" Padding="16,14"
+                    Cursor="Hand" MouseLeftButtonUp="ImportZipRow_Click">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Border Width="36" Height="36" CornerRadius="10" Background="{DynamicResource SurfaceBrush}" Margin="0,0,12,0">
+                        <TextBlock Text="📥" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                        <TextBlock Text="{loc:Loc import_zip}" FontSize="13" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}"/>
+                        <TextBlock Text="{loc:Loc import_zip_sub}" FontSize="11" Foreground="{DynamicResource TextSecondaryBrush}"/>
+                    </StackPanel>
+                    <TextBlock Grid.Column="2" Text="›" FontSize="18" Foreground="{DynamicResource TextSecondaryBrush}" VerticalAlignment="Center"/>
+                </Grid>
+            </Border>
+
+            <Border Background="{DynamicResource CardBrush}" CornerRadius="10" Margin="16,2,16,2" Padding="16,14"
+                    Cursor="Hand" MouseLeftButtonUp="ImportJourneyRow_Click">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Border Width="36" Height="36" CornerRadius="10" Background="{DynamicResource SurfaceBrush}" Margin="0,0,12,0">
+                        <TextBlock Text="✈" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                        <TextBlock Text="{loc:Loc import_journey}" FontSize="13" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}"/>
+                        <TextBlock Text="{loc:Loc import_journey_sub}" FontSize="11" Foreground="{DynamicResource TextSecondaryBrush}"/>
+                    </StackPanel>
+                    <TextBlock Grid.Column="2" Text="›" FontSize="18" Foreground="{DynamicResource TextSecondaryBrush}" VerticalAlignment="Center"/>
+                </Grid>
+            </Border>
+
+            <Border Background="{DynamicResource CardBrush}" CornerRadius="10" Margin="16,2,16,2" Padding="16,14"
+                    Cursor="Hand" MouseLeftButtonUp="ImportDayOneRow_Click">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Border Width="36" Height="36" CornerRadius="10" Background="{DynamicResource SurfaceBrush}" Margin="0,0,12,0">
+                        <TextBlock Text="📖" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                        <TextBlock Text="{loc:Loc import_dayone}" FontSize="13" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}"/>
+                        <TextBlock Text="{loc:Loc import_dayone_sub}" FontSize="11" Foreground="{DynamicResource TextSecondaryBrush}"/>
+                    </StackPanel>
+                    <TextBlock Grid.Column="2" Text="›" FontSize="18" Foreground="{DynamicResource TextSecondaryBrush}" VerticalAlignment="Center"/>
+                </Grid>
+            </Border>
+
+            <Border Background="{DynamicResource CardBrush}" CornerRadius="10" Margin="16,2,16,8" Padding="16,14"
+                    Cursor="Hand" MouseLeftButtonUp="ExportMarkdownRow_Click">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Border Width="36" Height="36" CornerRadius="10" Background="{DynamicResource SurfaceBrush}" Margin="0,0,12,0">
+                        <TextBlock Text="📤" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                        <TextBlock Text="{loc:Loc export_md}" FontSize="13" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}"/>
+                        <TextBlock Text="{loc:Loc export_md_sub}" FontSize="11" Foreground="{DynamicResource TextSecondaryBrush}"/>
+                    </StackPanel>
+                    <TextBlock Grid.Column="2" Text="›" FontSize="18" Foreground="{DynamicResource TextSecondaryBrush}" VerticalAlignment="Center"/>
+                </Grid>
+            </Border>
+
+            <!-- ABOUT -->
+            <TextBlock Text="{loc:Loc about}" FontSize="10" FontWeight="Bold"
+                       Foreground="{DynamicResource AccentBrush}" Margin="24,8,24,6"/>
+            <Border Background="{DynamicResource CardBrush}" CornerRadius="10" Margin="16,0,16,8" Padding="16,14">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="{loc:Loc version}" FontSize="13" FontWeight="SemiBold"
+                               Foreground="{DynamicResource TextPrimaryBrush}" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Column="1" Text="1.0.0"
+                               Foreground="{DynamicResource TextSecondaryBrush}" VerticalAlignment="Center"/>
+                </Grid>
+            </Border>
+
+            <Button Content="{loc:Loc close}" Style="{DynamicResource PrimaryButtonStyle}"
+                    Foreground="{DynamicResource TextPrimaryBrush}"
+                    HorizontalAlignment="Right" Margin="16,0,16,0" Padding="24,9"
+                    Click="BtnClose_Click"/>
+        </StackPanel>
+    </ScrollViewer>
+</Window>

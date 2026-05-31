@@ -1,0 +1,44 @@
+<Window x:Class="SecureNotesWin.Views.Dialogs.NewNoteDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="New Note" Height="270" Width="410"
+        WindowStartupLocation="CenterOwner" ResizeMode="NoResize"
+        Background="{DynamicResource BackgroundBrush}">
+    <StackPanel Margin="28">
+        <TextBlock Text="New Note"
+                   FontSize="19" FontWeight="Bold"
+                   Foreground="{DynamicResource TextPrimaryBrush}"
+                   Margin="0,0,0,22"/>
+
+        <TextBlock Text="Note Title" FontSize="12"
+                   Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,0,0,6"/>
+        <TextBox x:Name="TitleBox" Style="{DynamicResource ModernTextBox}"
+                 Margin="0,0,0,16" KeyDown="TitleBox_KeyDown"/>
+
+        <TextBlock Text="Notebook" FontSize="12"
+                   Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,0,0,6"/>
+        <ComboBox x:Name="NotebookCombo" DisplayMemberPath="Title" Margin="0,0,0,14"/>
+
+        <CheckBox x:Name="IsDiaryCheck" Content="This is a diary entry"
+                  Foreground="{DynamicResource TextPrimaryBrush}"/>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,22,0,0">
+            <Button Content="Cancel" Padding="18,8" Margin="0,0,10,0"
+                    Style="{DynamicResource SecondaryButtonStyle}"
+Foreground="{DynamicResource TextSecondaryBrush}"
+                    BorderThickness="0" Cursor="Hand" FontSize="13"
+                    Click="BtnCancel_Click" Name="BtnCancel">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="16"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <Button Content="Create" Style="{DynamicResource PrimaryButtonStyle}"
+                    Padding="18,8" Click="BtnCreate_Click"/>
+        </StackPanel>
+    </StackPanel>
+</Window>

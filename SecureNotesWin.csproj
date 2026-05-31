@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <RootNamespace>SecureNotesWin</RootNamespace>
+    <AssemblyName>SecureNotesWin</AssemblyName>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Version>1.0.0</Version>
+	   <ApplicationIcon>Assets\AppIcon.ico</ApplicationIcon>	  
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- KeePass KDBX support via KeePassLib (standalone, no KeePass install needed) -->
+    <!-- JSON serialization -->
+    <PackageReference Include="KeePassLib.Standard" Version="2.57.1" />
+    <PackageReference Include="Markdig.Wpf" Version="0.5.0.1" />
+    <PackageReference Include="MdXaml" Version="1.27.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+    <!-- Markdown rendering in WPF -->
+    <!-- Windows Credential Manager for secure settings storage -->
+    <!-- MVVM toolkit -->
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
+    <!-- Modern UI controls -->
+    <PackageReference Include="MahApps.Metro" Version="2.4.11" />
+    <PackageReference Include="MahApps.Metro.IconPacks.Material" Version="6.2.1" />
+    <!-- Colour emoji rendering via GDI+ -->
+    <PackageReference Include="System.Drawing.Common" Version="10.0.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\**\*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="MainViewModel.SetLanguage.patch.cs" />
+  </ItemGroup>
+
+</Project>

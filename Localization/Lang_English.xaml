@@ -1,0 +1,103 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <!-- App / Sidebar -->
+    <sys:String x:Key="Str_AppName">Secure Notes</sys:String>
+    <sys:String x:Key="Str_Books">BOOKS</sys:String>
+    <sys:String x:Key="Str_Tags">TAGS</sys:String>
+    <sys:String x:Key="Str_Settings">Settings</sys:String>
+    <sys:String x:Key="Str_LockVault">Lock Vault</sys:String>
+    <sys:String x:Key="Str_SelectABook">Select a book</sys:String>
+    <sys:String x:Key="Str_SelectOrCreate">Select or create a note</sys:String>
+    <sys:String x:Key="Str_AddBook">Add Book</sys:String>
+    <sys:String x:Key="Str_AddTag">Add Tag</sys:String>
+    <sys:String x:Key="Str_NewNote">New Note</sys:String>
+
+    <!-- Note editor toolbar -->
+    <sys:String x:Key="Str_Bold">Bold</sys:String>
+    <sys:String x:Key="Str_Italic">Italic</sys:String>
+    <sys:String x:Key="Str_BulletList">Bullet list</sys:String>
+    <sys:String x:Key="Str_NumberedList">Numbered list</sys:String>
+    <sys:String x:Key="Str_LargerText">Larger text</sys:String>
+    <sys:String x:Key="Str_SmallerText">Smaller text</sys:String>
+    <sys:String x:Key="Str_AddImage">Add image</sys:String>
+    <sys:String x:Key="Str_MoveToBook">Move to Book</sys:String>
+    <sys:String x:Key="Str_ManageTags">Manage Tags</sys:String>
+    <sys:String x:Key="Str_DeleteNote">Delete Note</sys:String>
+    <sys:String x:Key="Str_SavedIndicator">Saved ✓</sys:String>
+    <sys:String x:Key="Str_NoteTitle">Note Title</sys:String>
+    <sys:String x:Key="Str_DiaryEntry">This is a diary entry</sys:String>
+    <sys:String x:Key="Str_Attachments">📎 Attachments</sys:String>
+
+    <!-- Lock screen -->
+    <sys:String x:Key="Str_EnterPasswordHint">Enter your master password to unlock</sys:String>
+    <sys:String x:Key="Str_UnlockVault">Unlock Vault</sys:String>
+    <sys:String x:Key="Str_OpenVault">Open Vault</sys:String>
+    <sys:String x:Key="Str_CreateNewVault">Create New Vault</sys:String>
+    <sys:String x:Key="Str_CreateVaultBtn">Create Vault…</sys:String>
+    <sys:String x:Key="Str_OpenDifferentVault">Open different vault…</sys:String>
+    <sys:String x:Key="Str_CreateNewVaultBtn">Create new vault…</sys:String>
+    <sys:String x:Key="Str_MasterPassword">Master password:</sys:String>
+    <sys:String x:Key="Str_ConfirmPassword">Confirm password:</sys:String>
+    <sys:String x:Key="Str_Browse">Browse</sys:String>
+    <sys:String x:Key="Str_EnterPassword">Enter Password</sys:String>
+
+    <!-- Settings dialog -->
+    <sys:String x:Key="Str_Appearance">APPEARANCE</sys:String>
+    <sys:String x:Key="Str_General">GENERAL</sys:String>
+    <sys:String x:Key="Str_Security">SECURITY</sys:String>
+    <sys:String x:Key="Str_ImportExport">IMPORT &amp; EXPORT</sys:String>
+    <sys:String x:Key="Str_About">ABOUT</sys:String>
+    <sys:String x:Key="Str_Theme">Theme</sys:String>
+    <sys:String x:Key="Str_Language">Language</sys:String>
+    <sys:String x:Key="Str_DateFormat">Date Format</sys:String>
+    <sys:String x:Key="Str_TimeFormat">Time Format</sys:String>
+    <sys:String x:Key="Str_AutoLock">Auto-Lock</sys:String>
+    <sys:String x:Key="Str_ChangeMasterPassword">Change Master Password</sys:String>
+    <sys:String x:Key="Str_UpdateVaultPassword">Update your vault password</sys:String>
+    <sys:String x:Key="Str_ImportFromZip">Import from ZIP</sys:String>
+    <sys:String x:Key="Str_ImportFromZipSub">Import notes from a Markdown or JSON ZIP</sys:String>
+    <sys:String x:Key="Str_ImportFromJourney">Import from Journey</sys:String>
+    <sys:String x:Key="Str_ImportFromJourneySub">Import Journey.cloud diary (JSON ZIP)</sys:String>
+    <sys:String x:Key="Str_ImportFromDayOne">Import from DayOne</sys:String>
+    <sys:String x:Key="Str_ImportFromDayOneSub">Import DayOne diary (JSON ZIP)</sys:String>
+    <sys:String x:Key="Str_ExportMarkdown">Export as Markdown</sys:String>
+    <sys:String x:Key="Str_ExportMarkdownSub">Lossless backup in Markdown + Front Matter</sys:String>
+    <sys:String x:Key="Str_Version">Version</sys:String>
+    <sys:String x:Key="Str_Close">Close</sys:String>
+
+    <!-- Common dialogs -->
+    <sys:String x:Key="Str_Cancel">Cancel</sys:String>
+    <sys:String x:Key="Str_Save">Save</sys:String>
+    <sys:String x:Key="Str_Add">Add</sys:String>
+    <sys:String x:Key="Str_Create">Create</sys:String>
+    <sys:String x:Key="Str_Move">Move</sys:String>
+    <sys:String x:Key="Str_Select">Select</sys:String>
+    <sys:String x:Key="Str_Change">Change</sys:String>
+    <sys:String x:Key="Str_Name">Name</sys:String>
+    <sys:String x:Key="Str_Icon">Icon</sys:String>
+    <sys:String x:Key="Str_Type">Type</sys:String>
+    <sys:String x:Key="Str_Notebook">Notebook</sys:String>
+    <sys:String x:Key="Str_NewTag">New tag</sys:String>
+    <sys:String x:Key="Str_Minutes">Minutes</sys:String>
+    <sys:String x:Key="Str_Seconds">Seconds</sys:String>
+    <sys:String x:Key="Str_AutoLockTimeout">Auto-Lock Timeout</sys:String>
+    <sys:String x:Key="Str_LockVaultAfterInactivity">Lock vault after inactivity</sys:String>
+    <sys:String x:Key="Str_WhichBook">Which book do you want to move to?</sys:String>
+    <sys:String x:Key="Str_ChangePassword">Change Password</sys:String>
+    <sys:String x:Key="Str_CurrentPassword">Current password</sys:String>
+    <sys:String x:Key="Str_NewPassword">New password</sys:String>
+    <sys:String x:Key="Str_ConfirmNewPassword">Confirm new password</sys:String>
+    <sys:String x:Key="Str_EditNotebook">Edit Notebook</sys:String>
+
+    <sys:String x:Key="Str_Yes">Yes</sys:String>
+    <sys:String x:Key="Str_No">No</sys:String>
+    <sys:String x:Key="Str_Edit">Edit</sys:String>
+    <sys:String x:Key="Str_SelectTheme">Select Theme</sys:String>
+    <sys:String x:Key="Str_SelectLanguage">Select Language</sys:String>
+    <sys:String x:Key="Str_SelectDateFormat">Select Date Format</sys:String>
+    <sys:String x:Key="Str_SelectTimeFormat">Select Time Format</sys:String>
+    <sys:String x:Key="Str_Diary">Diary</sys:String>
+
+</ResourceDictionary>

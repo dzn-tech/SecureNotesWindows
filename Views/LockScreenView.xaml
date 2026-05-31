@@ -1,0 +1,211 @@
+<UserControl x:Class="SecureNotesWin.Views.LockScreenView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="{DynamicResource BackgroundBrush}">
+
+    <Grid>
+
+        <Rectangle IsHitTestVisible="False">
+            <Rectangle.Fill>
+                <RadialGradientBrush GradientOrigin="0.5,0.3"
+                                     Center="0.5,0.3"
+                                     RadiusX="0.6" RadiusY="0.6">
+                    <!-- Core: AccentAmberGlow #33FFB347 = 20% opacity amber -->
+                    <GradientStop Color="#33FFB347" Offset="0.0"/>
+                    <GradientStop Color="#1AFFB347" Offset="0.4"/>
+                    <GradientStop Color="#00FFB347" Offset="1.0"/>
+                </RadialGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="400">
+            <Grid HorizontalAlignment="Center" Margin="0,0,0,28">
+                <Ellipse Width="165" Height="155" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Ellipse.Fill>
+                        <RadialGradientBrush GradientOrigin="0.5,0.5" Center="0.5,0.5"
+                                            RadiusX="0.5" RadiusY="0.5">
+                            <GradientStop Color="#33FFB347" Offset="0.0"/>
+                            <GradientStop Color="#1AFFB347" Offset="0.45"/>
+                            <GradientStop Color="#00FFB347" Offset="1.0"/>
+                        </RadialGradientBrush>
+                    </Ellipse.Fill>
+                </Ellipse>
+
+                <!-- Icon circle — AccentAmberGlow fill (#33FFB347) + AccentAmber border at 40% opacity (#66FFB347)
+                     Matches: .background(AccentAmberGlow).border(1.dp, AccentAmber.copy(alpha=0.4f), CircleShape) -->
+                <Ellipse Width="88" Height="88"
+                         HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Ellipse.Fill>
+                        <!-- AccentAmberGlow = Color(0x33FFB347) -->
+                        <SolidColorBrush Color="#33FFB347"/>
+                    </Ellipse.Fill>
+                    <Ellipse.Stroke>
+                        <!-- AccentAmber.copy(alpha=0.4f): AccentAmber=#FFB347, 40% alpha = #66FFB347 -->
+                        <SolidColorBrush Color="#66FFB347"/>
+                    </Ellipse.Stroke>
+                    <Ellipse.StrokeThickness>1</Ellipse.StrokeThickness>
+                </Ellipse>
+
+                <!-- Lock icon — full-colour PNG, no tint (Unspecified), 50dp equivalent -->
+                <Image Source="/Assets/LockIcon_64.png"
+                       Width="50" Height="50"
+                       HorizontalAlignment="Center" VerticalAlignment="Center"
+                       RenderOptions.BitmapScalingMode="HighQuality"/>
+            </Grid>
+
+            <TextBlock Text="Secure Notes"
+                       FontSize="30" FontWeight="Bold"
+                       Foreground="{DynamicResource TextPrimaryBrush}"
+                       HorizontalAlignment="Center"
+                       Name ="SecureNotes"/>
+            <TextBlock Text="Enter your master password to unlock"
+                       FontSize="13"
+                       Foreground="{DynamicResource TextSecondaryBrush}"
+                       HorizontalAlignment="Center" Margin="0,6,0,32"
+                       Name="EnterPassword"/>
+
+            <!-- UNLOCK panel -->
+            <StackPanel x:Name="UnlockPanel" Visibility="Visible">
+
+                <Border x:Name="VaultPathBorder"
+                        Background="Transparent" CornerRadius="8"
+                        BorderBrush="#2A2A2A" BorderThickness="1"
+                        Padding="12,8" Margin="0,0,0,20" Visibility="Visible">
+                    <DockPanel>
+                        <TextBlock Text="📁 " FontSize="12" VerticalAlignment="Center"
+                                   Foreground="{DynamicResource AccentBrush}" DockPanel.Dock="Left"/>
+                        <Button Content="Browse" DockPanel.Dock="Right"
+                                Padding="10,3" FontSize="11"
+                                Background="Transparent"
+                                BorderBrush="{DynamicResource AccentBrush}"
+                                BorderThickness="1"
+                                Foreground="{DynamicResource AccentBrush}"
+                                Cursor="Hand"
+                                Click="BtnOpenVault_Click">
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Background="{TemplateBinding Background}"
+                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                            BorderThickness="{TemplateBinding BorderThickness}"
+                                            CornerRadius="12" Padding="{TemplateBinding Padding}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                        <TextBlock x:Name="VaultPathDisplay" FontSize="11"
+                                   Foreground="{DynamicResource TextSecondaryBrush}"
+                                   TextTrimming="CharacterEllipsis"
+                                   VerticalAlignment="Center" Margin="4,0"/>
+                    </DockPanel>
+                </Border>
+
+                <PasswordBox x:Name="UnlockPasswordBox" Style="{DynamicResource ModernPasswordBox}"
+                             Margin="0,0,0,6"
+                             KeyDown="PasswordBox_KeyDown"/>
+                <TextBlock x:Name="UnlockErrorLabel" Foreground="#EF4444" FontSize="12"
+                           Visibility="Collapsed" Margin="2,0,0,8"/>
+
+                <Button Content="Unlock Vault" Style="{DynamicResource PrimaryButtonStyle}"
+                        Margin="0,16,0,0" Width="220" HorizontalAlignment="Center"
+                        Click="BtnUnlock_Click"
+                        Name ="UnlockVault"/>
+                <Button Content="Create new vault…" Background="Transparent"
+                        Foreground="{DynamicResource AccentBrush}"
+                        BorderThickness="0" Cursor="Hand" FontSize="12"
+                        Margin="0,6,0,0" HorizontalAlignment="Center"
+                        Name="CreateVault"
+                        Click="BtnCreateVault_Click"/>
+            </StackPanel>
+
+            <!-- OPEN VAULT panel -->
+            <StackPanel x:Name="OpenVaultPanel" Visibility="Collapsed">
+                <TextBlock Text="Open Vault" FontSize="17" FontWeight="SemiBold"
+                           Foreground="{DynamicResource TextPrimaryBrush}"
+                           HorizontalAlignment="Center" Margin="0,0,0,16"/>
+                <Border Background="#141414" CornerRadius="8"
+                        BorderBrush="#2A2A2A" BorderThickness="1"
+                        Padding="12,8" Margin="0,0,0,16">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="📁 " FontSize="12" VerticalAlignment="Center"
+                                   Foreground="{DynamicResource AccentBrush}"/>
+                        <TextBlock x:Name="OpenVaultPathLabel" FontSize="11"
+                                   Foreground="{DynamicResource TextSecondaryBrush}"
+                                   TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+                <PasswordBox x:Name="OpenVaultPasswordBox" Style="{DynamicResource ModernPasswordBox}"
+                             Margin="0,0,0,6" KeyDown="OpenVaultPasswordBox_KeyDown"/>
+                <TextBlock x:Name="OpenVaultErrorLabel" Foreground="#EF4444" FontSize="12"
+                           Visibility="Collapsed" Margin="2,0,0,8"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
+                    <Button Content="Cancel" Padding="18,8" Margin="0,0,10,0"
+                            Style="{DynamicResource SecondaryButtonStyle}"
+                            BorderThickness="0" Cursor="Hand" FontSize="13"
+                            Click="BtnOpenVaultCancel_Click">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}" CornerRadius="16"
+                                        Padding="{TemplateBinding Padding}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                    <Button Content="Open Vault" Style="{DynamicResource PrimaryButtonStyle}"
+                            Click="BtnOpenVaultConfirm_Click"/>
+                </StackPanel>
+            </StackPanel>
+
+            <!-- SETUP panel -->
+            <StackPanel x:Name="SetupPanel" Visibility="Collapsed">
+                <TextBlock Text="Create New Vault" FontSize="17" FontWeight="SemiBold"
+                           Foreground="{DynamicResource TextPrimaryBrush}"
+                           HorizontalAlignment="Center" Margin="0,0,0,8"/>
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center" FontSize="12"
+                           Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,0,0,20">
+                    Create a master password and choose where to store your encrypted .kdbx vault.
+                    This file is compatible with KeePass and the Secure Notes Android app.
+                </TextBlock>
+                <TextBlock Text="Master password:" FontSize="13"
+                           Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,0,0,6"/>
+                <PasswordBox x:Name="SetupPasswordBox" Style="{DynamicResource ModernPasswordBox}"
+                             PasswordChanged="SetupPasswordBox_PasswordChanged"/>
+                <Grid Margin="0,10,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <ProgressBar x:Name="StrengthBar" Height="5"
+                                 Minimum="0" Maximum="100" Value="0"
+                                 Background="#2A2A2A" Foreground="{DynamicResource AccentBrush}"/>
+                    <TextBlock x:Name="StrengthLabel" Grid.Column="1" FontSize="11" Margin="10,0,0,0"
+                               Foreground="{DynamicResource TextSecondaryBrush}" VerticalAlignment="Center"/>
+                </Grid>
+                <TextBlock Text="Confirm password:" FontSize="13"
+                           Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,16,0,6"/>
+                <PasswordBox x:Name="SetupConfirmBox" Style="{DynamicResource ModernPasswordBox}"/>
+                <TextBlock x:Name="SetupErrorLabel" Foreground="#EF4444" FontSize="12"
+                           Visibility="Collapsed" Margin="2,6,0,0"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,22,0,0">
+                    <Button Content="Cancel" Padding="18,8" Margin="0,0,10,0"
+                             Style="{DynamicResource SecondaryButtonStyle}"
+                            BorderThickness="0" Cursor="Hand" FontSize="13"
+                            Click="BtnSetupCancel_Click">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}" CornerRadius="16"
+                                        Padding="{TemplateBinding Padding}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                    <Button Content="Create Vault…" Style="{DynamicResource PrimaryButtonStyle}"
+                            Click="BtnSetupCreate_Click"/>
+                </StackPanel>
+            </StackPanel>
+
+        </StackPanel>
+    </Grid>
+</UserControl>

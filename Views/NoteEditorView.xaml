@@ -1,0 +1,217 @@
+<UserControl x:Class="SecureNotesWin.Views.NoteEditorView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="{DynamicResource SurfaceBrush}">
+
+    <Grid>
+        <!-- Empty state -->
+        <StackPanel x:Name="EmptyState" VerticalAlignment="Center" HorizontalAlignment="Center"
+                    Visibility="Visible">
+            <TextBlock Text="📝" FontSize="48" HorizontalAlignment="Center"/>
+            <TextBlock x:Name="SelectOrCreateLabel" Text="Select or create a note"
+                       FontSize="14" Foreground="{DynamicResource TextSecondaryBrush}"
+                       HorizontalAlignment="Center" Margin="0,12,0,0"/>
+        </StackPanel>
+
+        <Grid x:Name="EditorPanel" Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>                     <!-- 0: action bar -->
+                <RowDefinition Height="Auto"/>                     <!-- 1: title -->
+                <RowDefinition Height="Auto"/>                     <!-- 2: meta row -->
+                <RowDefinition Height="Auto"/>                     <!-- 3: tags row -->
+                <RowDefinition x:Name="TextRow"     Height="*"/>  <!-- 4: WYSIWYG editor -->
+                <RowDefinition x:Name="SplitterRow" Height="0"/>  <!-- 5: drag splitter -->
+                <RowDefinition x:Name="ImageRow"    Height="0"/>  <!-- 6: image panel -->
+                <RowDefinition Height="Auto"/>                     <!-- 7: toolbar -->
+                <RowDefinition Height="Auto"/>                     <!-- 8: status bar -->
+            </Grid.RowDefinitions>
+
+            <!-- ── Action bar ── -->
+            <Grid Grid.Row="0" Background="{DynamicResource SurfaceBrush}" Height="44">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center"
+                            HorizontalAlignment="Right" Margin="8,0">
+                    <TextBlock x:Name="SaveIndicator" Text="Saved ✓"
+                               Foreground="#4ADE80" FontSize="11" VerticalAlignment="Center"
+                               Margin="0,0,8,0" Visibility="Collapsed"/>
+                    <Button x:Name="TagsButton" Content="🔖" ToolTip="Manage Tags"
+                            Background="Transparent" Foreground="#888888" BorderThickness="0"
+                            FontSize="17" Cursor="Hand" Padding="6,4"
+                            Click="TagsBtn_Click"/>
+                    <Button x:Name="MoveButton" Content="📚" ToolTip="Move to Book"
+                            Background="Transparent" Foreground="#888888" BorderThickness="0"
+                            FontSize="17" Cursor="Hand" Padding="6,4"
+                            Click="MoveToBookBtn_Click"/>
+                    <Button Content="🗑" ToolTip="Delete Note"
+                            Background="Transparent" BorderThickness="0"
+                            Foreground="#888888" FontSize="17" Cursor="Hand" Padding="6,4"
+                            Click="DeleteBtn_Click"/>
+                </StackPanel>
+            </Grid>
+            <Rectangle Grid.Row="0" Height="1" Fill="#222222" VerticalAlignment="Bottom"/>
+
+            <!-- ── Title ── -->
+            <TextBox Grid.Row="1" x:Name="TitleBox"
+                     FontSize="20" FontWeight="SemiBold"
+                     BorderThickness="0,0,0,1" BorderBrush="#222222"
+                     Padding="18,12,18,10"
+                     Background="Transparent"
+                     Foreground="{DynamicResource TextPrimaryBrush}"
+                     CaretBrush="{DynamicResource AccentBrush}"
+                     SelectionBrush="#40F59E0B"
+                     AcceptsReturn="False"
+                     TextChanged="TitleBox_TextChanged"/>
+
+            <!-- ── Meta row ── -->
+            <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="18,6,18,0" x:Name="MetaRow">
+                <Border x:Name="NotebookChip" Background="{DynamicResource SurfaceBrush}"  CornerRadius="4"
+                        Padding="6,2" Margin="0,0,10,0" Cursor="Hand"
+                        MouseLeftButtonUp="NotebookChip_Click">
+                    <!--<TextBlock x:Name="NotebookChipLabel" FontSize="11"
+                               Foreground="{DynamicResource TextSecondaryBrush}"/>-->
+                </Border>
+                <!--<TextBlock x:Name="NoteDateLabel" FontSize="11"
+                           Foreground="#505050" VerticalAlignment="Center"/>-->
+            </StackPanel>
+
+            <!-- ── Tags row ── -->
+            <WrapPanel Grid.Row="3" x:Name="TagsRow" Margin="18,6,18,0"/>
+
+            <!-- ── WYSIWYG RichTextBox editor ── -->
+            <!--
+                Single pane: no markdown syntax ever shown.
+                The RichTextBox FlowDocument is populated from stored markdown on load
+                and serialized back to markdown on every change.
+            -->
+            <RichTextBox Grid.Row="4"
+                         x:Name="RichEditor"
+                         BorderThickness="0"
+                         Padding="18,12"
+                         Background="{DynamicResource SurfaceBrush}"
+                         Foreground="{DynamicResource TextPrimaryBrush}"
+                         CaretBrush="{DynamicResource AccentBrush}"
+                         SelectionBrush="#40F59E0B"
+                         SelectionOpacity="0.4"
+                         FontFamily="Segoe UI"
+                         FontSize="15"
+                         VerticalScrollBarVisibility="Auto"
+                         HorizontalScrollBarVisibility="Disabled"
+                         AcceptsReturn="True" AcceptsTab="True"
+                         IsInactiveSelectionHighlightEnabled="True"
+                         TextChanged="RichEditor_TextChanged"
+                         PreviewKeyDown="RichEditor_PreviewKeyDown"
+                         SelectionChanged="RichEditor_SelectionChanged">
+                <RichTextBox.Resources>
+                    <!-- Kill the default white background on the inner ScrollViewer -->
+                    <Style TargetType="ScrollViewer">
+                        <Setter Property="Background" Value="Transparent"/>
+                    </Style>
+                </RichTextBox.Resources>
+            </RichTextBox>
+
+            <!-- ── Drag splitter between editor and image panel ── -->
+            <GridSplitter x:Name="PanelSplitter"
+                          Grid.Row="5"
+                          Height="5"
+                          HorizontalAlignment="Stretch"
+                          Background="{DynamicResource SurfaceBrush}" 
+                          BorderThickness="0,0,0,1"
+                          BorderBrush="#333333"
+                          Cursor="SizeNS"
+                          Visibility="Collapsed"
+                          ResizeDirection="Rows"
+                          ResizeBehavior="PreviousAndNext"/>
+
+            <!-- ── IMAGE PANEL (bottom half of split) ── -->
+            <Border Grid.Row="6" x:Name="ImagePanel"
+                   Background="{DynamicResource SurfaceBrush}" 
+                    BorderBrush="#222222" BorderThickness="0,1,0,0"
+                    Visibility="Collapsed"
+                    SizeChanged="ImagePanel_SizeChanged">
+                <Grid >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Border Grid.Row="0" Background="{DynamicResource SurfaceBrush}"  Padding="12,4">
+                        <TextBlock Text="📎 Attachments"
+                                   FontSize="11" FontWeight="SemiBold"
+                                   Foreground="#707070"/>
+                    </Border>
+
+                    <ScrollViewer Grid.Row="1" x:Name="ImageScrollViewer" 
+                                  VerticalScrollBarVisibility="Auto"
+                                  HorizontalScrollBarVisibility="Disabled" >
+                        <StackPanel x:Name="ImageContainer" Margin="12,8" />
+                    </ScrollViewer>
+                </Grid>
+            </Border>
+
+            <!-- ── Toolbar ── -->
+            <Border Grid.Row="7" Background="{DynamicResource SurfaceBrush}"  BorderBrush="#222222"
+                    BorderThickness="0,1,0,0">
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+                    <StackPanel Orientation="Horizontal" Margin="4,4">
+                        <Button x:Name="BoldBtn" Content="B" ToolTip="Bold" Width="34" Height="30"
+                                FontWeight="Bold" FontSize="13"
+                                Background="Transparent" BorderThickness="0"
+                                Foreground="{DynamicResource TextSecondaryBrush}"
+                                Cursor="Hand" Click="ToolbarBold_Click"/>
+                        <Button x:Name="ItalicBtn" Content="I" ToolTip="Italic" Width="34" Height="30"
+                                FontStyle="Italic" FontSize="13"
+                                Background="Transparent" BorderThickness="0"
+                                Foreground="{DynamicResource TextSecondaryBrush}"
+                                Cursor="Hand" Click="ToolbarItalic_Click"/>
+                        <Button x:Name="H1Btn" Content="H1" Width="34" Height="30" FontWeight="Bold" FontSize="11"
+                                Background="Transparent" BorderThickness="0"
+                                Foreground="{DynamicResource TextSecondaryBrush}"
+                                Cursor="Hand" Click="ToolbarH1_Click"/>
+                        <Button x:Name="H2Btn" Content="H2" Width="34" Height="30" FontWeight="Bold" FontSize="11"
+                                Background="Transparent" BorderThickness="0"
+                                Foreground="{DynamicResource TextSecondaryBrush}"
+                                Cursor="Hand" Click="ToolbarH2_Click"/>
+                        <Button x:Name="H3Btn" Content="H3" Width="34" Height="30" FontWeight="Bold" FontSize="11"
+                                Background="Transparent" BorderThickness="0"
+                                Foreground="{DynamicResource TextSecondaryBrush}"
+                                Cursor="Hand" Click="ToolbarH3_Click"/>
+                        <Rectangle Width="1" Fill="#333333" Margin="2,4"/>
+                        <!--<Button x:Name="BigBtn" Content="A+" ToolTip="Larger text" Width="34" Height="30" FontSize="13"
+                                Background="Transparent" BorderThickness="0"
+                                Foreground="{DynamicResource TextSecondaryBrush}"
+                                Cursor="Hand" Click="ToolbarBig_Click"/>-->
+                        <!--<Button x:Name="SmallBtn" Content="A-" ToolTip="Smaller text" Width="34" Height="30" FontSize="11"
+                                Background="Transparent" BorderThickness="0"
+                                Foreground="{DynamicResource TextSecondaryBrush}"
+                                Cursor="Hand" Click="ToolbarSmall_Click"/>-->
+                        <Rectangle Width="1" Fill="#333333" Margin="2,4"/>
+                        <Button x:Name="BulletBtn" Content="•" ToolTip="Bullet list" Width="34" Height="30" FontSize="16"
+                                Background="Transparent" BorderThickness="0"
+                                Foreground="{DynamicResource TextSecondaryBrush}"
+                                Cursor="Hand" Click="ToolbarBullet_Click"/>
+                        <Button x:Name="NumberedBtn" Content="1." ToolTip="Numbered list" Width="34" Height="30" FontSize="12" FontWeight="Bold"
+                                Background="Transparent" BorderThickness="0"
+                                Foreground="{DynamicResource TextSecondaryBrush}"
+                                Cursor="Hand" Click="ToolbarNumbered_Click"/>
+                        <Rectangle Width="1" Fill="#333333" Margin="2,4"/>
+                        <Button Content="🖼" ToolTip="Add image" Width="34" Height="30" FontSize="14"
+                                Background="Transparent" BorderThickness="0"
+                                Foreground="{DynamicResource TextSecondaryBrush}"
+                                Cursor="Hand" Click="ToolbarImage_Click"/>
+                    </StackPanel>
+                </ScrollViewer>
+            </Border>
+
+            <!-- ── Status bar ── -->
+            <Grid Grid.Row="8" Height="26" Background="{DynamicResource SurfaceBrush}" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="StatusLabel" VerticalAlignment="Center" Margin="14,0"
+                           FontSize="11" Foreground="#505050"/>
+                <TextBlock x:Name="WordCountLabel" Grid.Column="1" VerticalAlignment="Center"
+                           Margin="0,0,14,0" FontSize="11" Foreground="#505050"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

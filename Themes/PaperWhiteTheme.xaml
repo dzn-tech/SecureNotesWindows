@@ -1,0 +1,158 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Color x:Key="PrimaryColor">#7B5E2A</Color>
+    <Color x:Key="PrimaryDarkColor">#5C4420</Color>
+    <Color x:Key="AccentColor">#7B5E2A</Color>
+    <Color x:Key="SurfaceColor">#FFFEF8</Color>
+    <Color x:Key="BackgroundColor">#F5F0E4</Color>
+    <Color x:Key="SidebarColor">#E8E0CC</Color>
+    <Color x:Key="SidebarTextColor">#2C2010</Color>
+    <Color x:Key="SidebarAccentColor">#7B5E2A</Color>
+    <Color x:Key="TextPrimaryColor">#1E1710</Color>
+    <Color x:Key="TextSecondaryColor">#5A4A35</Color>
+    <Color x:Key="DividerColor">#C8BCA0</Color>
+    <Color x:Key="TagOrangeColor">#8B5E00</Color>
+    <Color x:Key="DiaryPinkColor">#A0325A</Color>
+    <Color x:Key="FavoriteYellowColor">#8B6800</Color>
+    <Color x:Key="TodoGreenColor">#2E6040</Color>
+    <Color x:Key="CardColor">#FFFEF8</Color>
+    <Color x:Key="SelectedCardColor">#EDE6D4</Color>
+
+    <SolidColorBrush x:Key="PrimaryBrush"        Color="{StaticResource PrimaryColor}"/>
+    <SolidColorBrush x:Key="AccentBrush"         Color="{StaticResource AccentColor}"/>
+    <SolidColorBrush x:Key="SurfaceBrush"        Color="{StaticResource SurfaceColor}"/>
+    <SolidColorBrush x:Key="BackgroundBrush"     Color="{StaticResource BackgroundColor}"/>
+    <SolidColorBrush x:Key="SidebarBrush"        Color="{StaticResource SidebarColor}"/>
+    <SolidColorBrush x:Key="SidebarTextBrush"    Color="{StaticResource SidebarTextColor}"/>
+    <SolidColorBrush x:Key="SidebarAccentBrush"  Color="{StaticResource SidebarAccentColor}"/>
+    <SolidColorBrush x:Key="TextPrimaryBrush"    Color="{StaticResource TextPrimaryColor}"/>
+    <SolidColorBrush x:Key="TextSecondaryBrush"  Color="{StaticResource TextSecondaryColor}"/>
+    <SolidColorBrush x:Key="DividerBrush"        Color="{StaticResource DividerColor}"/>
+    <SolidColorBrush x:Key="TagOrangeBrush"      Color="{StaticResource TagOrangeColor}"/>
+    <SolidColorBrush x:Key="DiaryPinkBrush"      Color="{StaticResource DiaryPinkColor}"/>
+    <SolidColorBrush x:Key="FavoriteYellowBrush" Color="{StaticResource FavoriteYellowColor}"/>
+    <SolidColorBrush x:Key="TodoGreenBrush"      Color="{StaticResource TodoGreenColor}"/>
+    <SolidColorBrush x:Key="CardBrush"           Color="{StaticResource CardColor}"/>
+    <SolidColorBrush x:Key="SelectedCardBrush"   Color="{StaticResource SelectedCardColor}"/>
+
+    <Style x:Key="NoteCardStyle" TargetType="Border">
+        <Setter Property="Background"      Value="{StaticResource CardBrush}"/>
+        <Setter Property="CornerRadius"    Value="10"/>
+        <Setter Property="Margin"          Value="0,0,0,8"/>
+        <Setter Property="Padding"         Value="14,12"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="BorderBrush"     Value="#C8BCA0"/>
+    </Style>
+
+    <Style x:Key="SidebarButtonStyle" TargetType="Button">
+        <Setter Property="Background"                 Value="Transparent"/>
+        <Setter Property="Foreground"                 Value="{StaticResource SidebarTextBrush}"/>
+        <Setter Property="BorderThickness"            Value="0"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="Padding"                    Value="14,9"/>
+        <Setter Property="Cursor"                     Value="Hand"/>
+        <Setter Property="FontSize"                   Value="13"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="Bd" Background="{TemplateBinding Background}" CornerRadius="8" Margin="4,2">
+                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="Center" Margin="{TemplateBinding Padding}"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Bd" Property="Background" Value="#DDD5BE"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="PrimaryButtonStyle" TargetType="Button">
+        <Setter Property="Background"    Value="{StaticResource PrimaryBrush}"/>
+        <Setter Property="Foreground"    Value="#FFFEF8"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Padding"       Value="22,9"/>
+        <Setter Property="Cursor"        Value="Hand"/>
+        <Setter Property="FontWeight"    Value="Bold"/>
+        <Setter Property="FontSize"      Value="13"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="Bd" Background="{TemplateBinding Background}"
+                            CornerRadius="20" Padding="{TemplateBinding Padding}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Bd" Property="Opacity" Value="0.9"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ModernTextBox" TargetType="TextBox">
+        <Setter Property="BorderBrush"     Value="{StaticResource DividerBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Padding"         Value="10,8"/>
+        <Setter Property="FontSize"        Value="13"/>
+        <Setter Property="Background"      Value="#FFFEF8"/>
+        <Setter Property="Foreground"      Value="{StaticResource TextPrimaryBrush}"/>
+        <Setter Property="CaretBrush"      Value="{StaticResource AccentBrush}"/>
+        <Setter Property="SelectionBrush"  Value="#407B5E2A"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border x:Name="Bd" Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="8">
+                        <ScrollViewer x:Name="PART_ContentHost" Margin="{TemplateBinding Padding}" VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter TargetName="Bd" Property="BorderBrush" Value="{StaticResource AccentBrush}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ModernPasswordBox" TargetType="PasswordBox">
+        <Setter Property="BorderBrush"     Value="{StaticResource DividerBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Padding"         Value="10,8"/>
+        <Setter Property="FontSize"        Value="13"/>
+        <Setter Property="Background"      Value="#FFFEF8"/>
+        <Setter Property="Foreground"      Value="{StaticResource TextPrimaryBrush}"/>
+        <Setter Property="CaretBrush"      Value="{StaticResource AccentBrush}"/>
+        <Setter Property="SelectionBrush"  Value="#407B5E2A"/>
+        <Setter Property="MinHeight"       Value="36"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="PasswordBox">
+                    <Border x:Name="Bd" Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="8" MinHeight="36">
+                        <ScrollViewer x:Name="PART_ContentHost" Margin="{TemplateBinding Padding}" VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter TargetName="Bd" Property="BorderBrush" Value="{StaticResource AccentBrush}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="RadioButton">
+        <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}"/>
+        <Setter Property="FontSize"   Value="13"/>
+    </Style>
+
+</ResourceDictionary>
