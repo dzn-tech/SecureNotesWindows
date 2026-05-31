@@ -1,120 +1,139 @@
-# Third Party Notices
+# Secure Notes for Windows
 
-Secure Notes for Windows includes third-party open-source software.
+Secure Notes is a privacy-focused Windows journal and notebook application that stores your memories, notes, photos, and personal content inside a single encrypted KeePass KDBX 4.x database.
 
-We would like to thank the authors and contributors of these projects.
+Built on open standards, Secure Notes gives you full ownership of your data. Your vault can be accessed using many compatible KeePass applications, ensuring you are never locked into a proprietary format.
 
-## MahApps.Metro
+## Features
 
-Project: https://github.com/MahApps/MahApps.Metro
+### Multiple Books
 
-Purpose:
-Modern UI controls, styling, and themes for WPF applications.
+Create and manage:
 
-License:
-MIT License
+* Diaries
+* Journals
+* Notebooks
 
-Copyright:
-Copyright (c) MahApps and Contributors
+### Tags & Organisation
 
----
+* Create custom tags
+* Categorise entries
+* Browse entries by tag
 
-## ControlzEx
+### Secure Photo Storage
 
-Project: https://github.com/ControlzEx/ControlzEx
+Store photos and attachments directly inside your encrypted vault.
 
-Purpose:
-Window and control extensions used by MahApps.Metro.
+All attachments are encrypted alongside your notes and journal entries.
 
-License:
-MIT License
+### Themes
 
-Copyright:
-Copyright (c) ControlzEx Contributors
+Choose from four built-in themes:
 
----
+* Light Mode
+* Dark Mode
+* Paper White
+* Ink Black
 
-## SharpZipLib
+### Multi-Language Support
 
-Project: https://github.com/icsharpcode/SharpZipLib
+Currently localised in 10 languages, with additional translations planned.
 
-Purpose:
-ZIP archive creation and extraction functionality.
+## Security & Privacy
 
-License:
-MIT License
+Secure Notes uses modern security standards:
 
-Copyright:
-Copyright (c) SharpZipLib Contributors
+* AES-256 database encryption
+* Argon2d key derivation
+* HMAC-SHA256 integrity protection
+* Encrypted attachments and photos
 
----
+Your data remains encrypted within a standard KeePass KDBX 4.x database.
 
-## Kotpass
+## Sync & Compatibility
 
-Project: https://github.com/keemobile/kotpass
+Your encrypted database can be stored and synchronised using services such as:
 
-Purpose:
-KeePass KDBX database compatibility and processing.
+* Google Drive
+* Microsoft OneDrive
+* Dropbox
+* Syncthing
+* Network drives
+* Manual file transfer
 
-License:
-Apache License 2.0
+Because Secure Notes uses the standard KeePass KDBX 4.x format, your data remains portable and accessible using compatible KeePass applications.
 
-Copyright:
-Copyright (c) Kotpass Contributors
+## Import
 
----
+Supported imports:
 
-## KeePass File Format
+* Day One ZIP exports
+* Journey ZIP exports
+* Joplin Markdown + Front Matter ZIP exports
 
-Secure Notes uses the open KeePass KDBX file format.
+## Export
 
-KeePass Project:
-https://keepass.info
+Supported exports:
 
-KeePass is developed independently and is not affiliated with Secure Notes.
+* Markdown + Front Matter ZIP exports
 
----
+## System Requirements
 
-## Microsoft .NET
+* Windows 10 or later
+* 64-bit operating system
 
-Project:
-https://dotnet.microsoft.com
+## Installation
 
-Purpose:
-Application runtime and framework components.
+Download the latest installer from the Releases page and run:
 
-License:
-Microsoft .NET Library License and associated Microsoft licensing terms.
+```text
+SecureNotesInstaller.msi
+```
 
-Copyright:
-Copyright (c) Microsoft Corporation
+Follow the installation wizard to complete setup.
 
----
+## Building from Source
 
-## Additional Dependencies
+### Prerequisites
 
-This project may include additional direct or transitive NuGet dependencies not explicitly listed in this document.
+* Visual Studio 2022
+* .NET 8 SDK
 
-For the complete list of dependencies used by a specific release, please refer to:
+### Build
 
-* The source code repository
-* NuGet package references
-* Dependency manifests generated during build
+```powershell
+dotnet restore
+dotnet build -c Release
+```
 
-All third-party software remains the property of its respective copyright holders and is used in accordance with its license terms.
+### Publish
 
----
+```powershell
+dotnet publish -c Release -r win-x64 --self-contained true
+```
 
-## Trademarks
+## Screenshots
 
-KeePass, Microsoft, Windows, OneDrive, Google Drive, and any other referenced trademarks are the property of their respective owners.
+Screenshots can be found in the repository documentation and release pages.
 
-Use of these names does not imply endorsement or affiliation unless explicitly stated.
+## Important Compatibility Notice
 
----
+While Secure Notes uses the standard KeePass KDBX 4.x format, not all third-party KeePass applications fully support every feature used by Secure Notes.
 
-## License Compliance
+If you choose to edit your database using third-party KeePass applications:
 
-The Secure Notes project is distributed under the MIT License.
+* Always keep backups
+* Verify compatibility
+* Exercise caution when saving changes
 
-Third-party components remain subject to their own licenses, which may differ from the license of Secure Notes. Users and redistributors should review the license terms of any included third-party components before redistribution.
+Improper modifications by incompatible applications may result in database corruption or data loss.
+
+**Refrain from editing your database with third-party KeePass applications unless you fully understand what you are doing.**
+
+## Open Source Libraries
+
+This project uses a number of open-source libraries. See THIRD_PARTY_NOTICES.md for details.
+
+## License
+
+This project is licensed under the MIT License.
