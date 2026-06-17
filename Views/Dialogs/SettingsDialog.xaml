@@ -180,12 +180,31 @@
                 </Grid>
             </Border>
 
-            <!-- IMPORT & EXPORT -->
-            <TextBlock Text="{loc:Loc import_export}" FontSize="10" FontWeight="Bold"
+            <!-- BACKUP & RESTORE -->
+            <TextBlock Text="{loc:Loc backup_restore}" FontSize="10" FontWeight="Bold"
                        Foreground="{DynamicResource AccentBrush}" Margin="24,8,24,6"/>
 
             <Border Background="{DynamicResource CardBrush}" CornerRadius="10" Margin="16,0,16,2" Padding="16,14"
-                    Cursor="Hand" MouseLeftButtonUp="ImportZipRow_Click">
+                    Cursor="Hand" MouseLeftButtonUp="BackupToZipRow_Click">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Border Width="36" Height="36" CornerRadius="10" Background="{DynamicResource SurfaceBrush}" Margin="0,0,12,0">
+                        <TextBlock Text="📤" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                        <TextBlock Text="{loc:Loc backup_to_zip}" FontSize="13" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}"/>
+                        <TextBlock Text="{loc:Loc backup_to_zip_sub}" FontSize="11" Foreground="{DynamicResource TextSecondaryBrush}"/>
+                    </StackPanel>
+                    <TextBlock Grid.Column="2" Text="›" FontSize="18" Foreground="{DynamicResource TextSecondaryBrush}" VerticalAlignment="Center"/>
+                </Grid>
+            </Border>
+
+            <Border Background="{DynamicResource CardBrush}" CornerRadius="10" Margin="16,2,16,8" Padding="16,14"
+                    Cursor="Hand" MouseLeftButtonUp="RestoreFromZipRow_Click">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -196,14 +215,18 @@
                         <TextBlock Text="📥" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
                     <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                        <TextBlock Text="{loc:Loc import_zip}" FontSize="13" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}"/>
-                        <TextBlock Text="{loc:Loc import_zip_sub}" FontSize="11" Foreground="{DynamicResource TextSecondaryBrush}"/>
+                        <TextBlock Text="{loc:Loc restore_from_zip}" FontSize="13" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}"/>
+                        <TextBlock Text="{loc:Loc restore_from_zip_sub}" FontSize="11" Foreground="{DynamicResource TextSecondaryBrush}"/>
                     </StackPanel>
                     <TextBlock Grid.Column="2" Text="›" FontSize="18" Foreground="{DynamicResource TextSecondaryBrush}" VerticalAlignment="Center"/>
                 </Grid>
             </Border>
 
-            <Border Background="{DynamicResource CardBrush}" CornerRadius="10" Margin="16,2,16,2" Padding="16,14"
+            <!-- IMPORT -->
+            <TextBlock Text="{loc:Loc import_section}" FontSize="10" FontWeight="Bold"
+                       Foreground="{DynamicResource AccentBrush}" Margin="24,8,24,6"/>
+
+            <Border Background="{DynamicResource CardBrush}" CornerRadius="10" Margin="16,0,16,2" Padding="16,14"
                     Cursor="Hand" MouseLeftButtonUp="ImportJourneyRow_Click">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -222,7 +245,7 @@
                 </Grid>
             </Border>
 
-            <Border Background="{DynamicResource CardBrush}" CornerRadius="10" Margin="16,2,16,2" Padding="16,14"
+            <Border Background="{DynamicResource CardBrush}" CornerRadius="10" Margin="16,2,16,8" Padding="16,14"
                     Cursor="Hand" MouseLeftButtonUp="ImportDayOneRow_Click">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -236,25 +259,6 @@
                     <StackPanel Grid.Column="1" VerticalAlignment="Center">
                         <TextBlock Text="{loc:Loc import_dayone}" FontSize="13" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}"/>
                         <TextBlock Text="{loc:Loc import_dayone_sub}" FontSize="11" Foreground="{DynamicResource TextSecondaryBrush}"/>
-                    </StackPanel>
-                    <TextBlock Grid.Column="2" Text="›" FontSize="18" Foreground="{DynamicResource TextSecondaryBrush}" VerticalAlignment="Center"/>
-                </Grid>
-            </Border>
-
-            <Border Background="{DynamicResource CardBrush}" CornerRadius="10" Margin="16,2,16,8" Padding="16,14"
-                    Cursor="Hand" MouseLeftButtonUp="ExportMarkdownRow_Click">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <Border Width="36" Height="36" CornerRadius="10" Background="{DynamicResource SurfaceBrush}" Margin="0,0,12,0">
-                        <TextBlock Text="📤" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </Border>
-                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                        <TextBlock Text="{loc:Loc export_md}" FontSize="13" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}"/>
-                        <TextBlock Text="{loc:Loc export_md_sub}" FontSize="11" Foreground="{DynamicResource TextSecondaryBrush}"/>
                     </StackPanel>
                     <TextBlock Grid.Column="2" Text="›" FontSize="18" Foreground="{DynamicResource TextSecondaryBrush}" VerticalAlignment="Center"/>
                 </Grid>

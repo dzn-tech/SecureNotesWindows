@@ -47,7 +47,8 @@
     <sys:String x:Key="Str_Appearance">APPEARANCE</sys:String>
     <sys:String x:Key="Str_General">GENERAL</sys:String>
     <sys:String x:Key="Str_Security">SECURITY</sys:String>
-    <sys:String x:Key="Str_ImportExport">IMPORT &amp; EXPORT</sys:String>
+    <sys:String x:Key="Str_BackupRestore">BACKUP &amp; RESTORE</sys:String>
+    <sys:String x:Key="Str_ImportSection">IMPORT</sys:String>
     <sys:String x:Key="Str_About">ABOUT</sys:String>
     <sys:String x:Key="Str_Theme">Theme</sys:String>
     <sys:String x:Key="Str_Language">Language</sys:String>
@@ -56,16 +57,22 @@
     <sys:String x:Key="Str_AutoLock">Auto-Lock</sys:String>
     <sys:String x:Key="Str_ChangeMasterPassword">Change Master Password</sys:String>
     <sys:String x:Key="Str_UpdateVaultPassword">Update your vault password</sys:String>
-    <sys:String x:Key="Str_ImportFromZip">Import from ZIP</sys:String>
-    <sys:String x:Key="Str_ImportFromZipSub">Import notes from a Markdown or JSON ZIP</sys:String>
+    <sys:String x:Key="Str_BackupToZip">Back up to Zip</sys:String>
+    <sys:String x:Key="Str_BackupToZipSub">Save all notes as a Markdown ZIP backup</sys:String>
+    <sys:String x:Key="Str_RestoreFromZip">Restore from Zip</sys:String>
+    <sys:String x:Key="Str_RestoreFromZipSub">Restore notes from a Markdown ZIP backup</sys:String>
     <sys:String x:Key="Str_ImportFromJourney">Import from Journey</sys:String>
     <sys:String x:Key="Str_ImportFromJourneySub">Import Journey.cloud diary (JSON ZIP)</sys:String>
     <sys:String x:Key="Str_ImportFromDayOne">Import from DayOne</sys:String>
     <sys:String x:Key="Str_ImportFromDayOneSub">Import DayOne diary (JSON ZIP)</sys:String>
-    <sys:String x:Key="Str_ExportMarkdown">Export as Markdown</sys:String>
-    <sys:String x:Key="Str_ExportMarkdownSub">Lossless backup in Markdown + Front Matter</sys:String>
     <sys:String x:Key="Str_Version">Version</sys:String>
     <sys:String x:Key="Str_Close">Close</sys:String>
+    <sys:String x:Key="Str_BackupBookSelectorTitle">Back up which book?</sys:String>
+    <sys:String x:Key="Str_RestoreBookSelectorTitle">Restore to which book?</sys:String>
+    <sys:String x:Key="Str_ImportBookSelectorTitle">Import {0} to which book?</sys:String>
+    <sys:String x:Key="Str_BackupSuccess">Backup complete.</sys:String>
+    <sys:String x:Key="Str_RestoreSuccess">Restored {0} note(s).</sys:String>
+    <sys:String x:Key="Str_ImportSuccess">Imported {0} note(s) from {1}.</sys:String>
 
     <!-- Common dialogs -->
     <sys:String x:Key="Str_Cancel">Cancel</sys:String>

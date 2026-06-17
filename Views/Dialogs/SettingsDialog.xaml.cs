@@ -164,10 +164,57 @@ namespace SecureNotesWin.Views.Dialogs
             }
         }
 
-        // ── Import / Export ──
+        // ── Backup & Restore ──
 
-        private void ImportZipRow_Click(object sender, RoutedEventArgs e)
-            => _ = DoImportZipAsync();
+        private void BackupToZipRow_Click(object sender, RoutedEventArgs e)
+            => _ = DoBackupToZipAsync();
+
+        private void RestoreFromZipRow_Click(object sender, RoutedEventArgs e)
+            => _ = DoRestoreFromZipAsync();
+
+        private async Task DoBackupToZipAsync()
+        {
+            var bookDlg = new BookSelectorDialog(_vm.Notebooks.ToList(),
+                LocalizationManager.Instance.GetString("backup_book_selector_title"),
+                showAllOption: true)
+            { Owner = this };
+            string? notebookId = null;
+            if (bookDlg.ShowDialog() == true) notebookId = bookDlg.SelectedNotebookId;
+
+            var dlg = new SaveFileDialog
+            {
+                Filter   = "ZIP archive (*.zip)|*.zip",
+                FileName = $"SecureNotes_Backup_{DateTime.Now:yyyyMMdd_HHmmss}.zip"
+            };
+            if (dlg.ShowDialog() != true) return;
+
+            await Task.Run(() => ExportToMarkdownZip(dlg.FileName, notebookId));
+            MessageBox.Show(
+                LocalizationManager.Instance.GetString("backup_success"),
+                LocalizationManager.Instance.GetString("backup_to_zip"),
+                MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private async Task DoRestoreFromZipAsync()
+        {
+            var dlg = new OpenFileDialog { Filter = "ZIP archive (*.zip)|*.zip|All Files (*.*)|*.*" };
+            if (dlg.ShowDialog() != true) return;
+
+            var bookDlg = new BookSelectorDialog(_vm.Notebooks.ToList(),
+                LocalizationManager.Instance.GetString("restore_book_selector_title"))
+            { Owner = this };
+            string? notebookId = null;
+            if (bookDlg.ShowDialog() == true) notebookId = bookDlg.SelectedNotebookId;
+
+            int count = await Task.Run(() => ImportFromMarkdownZip(dlg.FileName, notebookId));
+            _vm.RefreshCollections();
+            MessageBox.Show(
+                string.Format(LocalizationManager.Instance.GetString("restore_success"), count),
+                LocalizationManager.Instance.GetString("restore_from_zip"),
+                MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        // ── Import ──
 
         private void ImportJourneyRow_Click(object sender, RoutedEventArgs e)
             => _ = ImportJourneyOrDayOneAsync(isDayOne: false);
@@ -175,72 +222,33 @@ namespace SecureNotesWin.Views.Dialogs
         private void ImportDayOneRow_Click(object sender, RoutedEventArgs e)
             => _ = ImportJourneyOrDayOneAsync(isDayOne: true);
 
-        private void ExportMarkdownRow_Click(object sender, RoutedEventArgs e)
-            => _ = DoExportMarkdownAsync();
-
-        private async void BtnImportZip_Click(object sender, RoutedEventArgs e)
-            => await DoImportZipAsync();
-
-        private async Task DoImportZipAsync()
-        {
-            var dlg = new OpenFileDialog { Filter = "ZIP archive (*.zip)|*.zip|All Files (*.*)|*.*" };
-            if (dlg.ShowDialog() != true) return;
-
-            // Book selector
-            var bookDlg = new BookSelectorDialog(_vm.Notebooks.ToList(), "Import to which book?") { Owner = this };
-            string? notebookId = null;
-            if (bookDlg.ShowDialog() == true) notebookId = bookDlg.SelectedNotebookId;
-
-            int count = await Task.Run(() => ImportFromMarkdownZip(dlg.FileName, notebookId));
-            _vm.RefreshCollections();
-            MessageBox.Show($"Imported {count} note(s).", "Import", MessageBoxButton.OK, MessageBoxImage.Information);
-        }
-
         private async Task ImportJourneyOrDayOneAsync(bool isDayOne)
         {
-            var label = isDayOne ? "DayOne" : "Journey";
-            var dlg = new OpenFileDialog { Filter = "ZIP archive (*.zip)|*.zip", Title = $"Import from {label}" };
+            var label = isDayOne
+                ? LocalizationManager.Instance.GetString("import_dayone")
+                : LocalizationManager.Instance.GetString("import_journey");
+            var dlg = new OpenFileDialog { Filter = "ZIP archive (*.zip)|*.zip", Title = label };
             if (dlg.ShowDialog() != true) return;
 
-            var bookDlg = new BookSelectorDialog(_vm.Notebooks.ToList(), $"Import {label} to which book?") { Owner = this };
+            var bookDlg = new BookSelectorDialog(_vm.Notebooks.ToList(),
+                string.Format(LocalizationManager.Instance.GetString("import_book_selector_title"), label))
+            { Owner = this };
             string? notebookId = null;
             if (bookDlg.ShowDialog() == true) notebookId = bookDlg.SelectedNotebookId;
 
             int count = await Task.Run(() => ImportFromJourneyOrDayOne(dlg.FileName, notebookId, isDayOne));
             _vm.RefreshCollections();
-            MessageBox.Show($"Imported {count} note(s) from {label}.", "Import",
-                MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show(
+                string.Format(LocalizationManager.Instance.GetString("import_success"), count, label),
+                label, MessageBoxButton.OK, MessageBoxImage.Information);
         }
-
-        private async void BtnExportMarkdown_Click(object sender, RoutedEventArgs e)
-            => await DoExportMarkdownAsync();
-
-        private async Task DoExportMarkdownAsync()
-        {
-            var bookDlg = new BookSelectorDialog(_vm.Notebooks.ToList(), "Export which book?",
-                showAllOption: true)
-            { Owner = this };
-            string? notebookId = null;
-            bool all = true;
-            if (bookDlg.ShowDialog() == true) { notebookId = bookDlg.SelectedNotebookId; all = notebookId == null; }
-
-            var dlg = new SaveFileDialog
-            {
-                Filter = "ZIP archive (*.zip)|*.zip",
-                FileName = $"SecureNotes_Export_{DateTime.Now:yyyyMMdd}.zip"
-            };
-            if (dlg.ShowDialog() != true) return;
-
-            await Task.Run(() => ExportToMarkdownZip(dlg.FileName, notebookId));
-            MessageBox.Show("Export complete.", "Export", MessageBoxButton.OK, MessageBoxImage.Information);
-        }
-
-        // ── Import logic (mirrors Android ImportExportService) ──
 
         private int ImportFromMarkdownZip(string zipPath, string? targetNotebookId)
         {
             int count = 0;
             var importedNotes = new List<Note>();
+            // noteId → tag title strings parsed from front-matter
+            var noteTagTitles = new Dictionary<string, List<string>>();
             using var zip = ZipFile.OpenRead(zipPath);
 
             // Build a lookup of every non-markdown file by bare filename so image
@@ -278,26 +286,19 @@ namespace SecureNotesWin.Views.Dialogs
                     var alt = match.Groups[1].Value;
                     var src = match.Groups[2].Value;
 
-                    // Already a data-URI from a previous export – strip it; we can't
-                    // recover the filename so skip silently.
                     if (src.StartsWith("data:", StringComparison.OrdinalIgnoreCase))
                         return match.Value;
 
-                    // Remote URL – leave untouched.
                     if (src.StartsWith("http", StringComparison.OrdinalIgnoreCase))
                         return match.Value;
 
-                    // Local filename reference – look it up in the ZIP image table.
                     var bareFileName = Path.GetFileName(src);
                     if (!imageLookup.TryGetValue(bareFileName, out var bytes))
-                        return match.Value;   // image not found in ZIP, leave ref as-is
+                        return match.Value;
 
-                    // Give the attachment a stable, unique name so multiple notes that
-                    // reference the same source file don't collide in the KDBX.
                     var attachName = $"{Guid.NewGuid():N}{Path.GetExtension(bareFileName)}";
                     attachments[attachName] = bytes;
 
-                    // Rewrite the markdown ref to point at the KDBX attachment name.
                     return $"![{alt}]({attachName})";
                 });
 
@@ -318,14 +319,19 @@ namespace SecureNotesWin.Views.Dialogs
                 if (meta.TryGetValue("created", out var cr) && DateTimeOffset.TryParse(cr, out var cdt))
                     createdAt = cdt.ToUnixTimeMilliseconds();
 
-                // Build note in memory — collect for a single bulk write at the end.
+                long updatedAt = createdAt;
+                if (meta.TryGetValue("updated", out var up) && DateTimeOffset.TryParse(up, out var udt))
+                    updatedAt = udt.ToUnixTimeMilliseconds();
+
                 var note = new Note
                 {
                     Title      = title,
                     Body       = body,
                     NotebookId = nbId,
                     CreatedAt  = createdAt,
-                    UpdatedAt  = createdAt,
+                    UpdatedAt  = updatedAt,
+                    IsDiary    = meta.TryGetValue("diary", out var d) && d == "true",
+                    IsFavorite = meta.TryGetValue("favorite", out var f) && f == "true",
                 };
 
                 foreach (var kv in attachments)
@@ -334,12 +340,25 @@ namespace SecureNotesWin.Views.Dialogs
                     note.AttachmentNames.Add(kv.Key);
                 }
 
+                // Parse tags from front-matter: "tags: Work, Personal, Ideas"
+                if (meta.TryGetValue("tags", out var tagsRaw) && !string.IsNullOrWhiteSpace(tagsRaw))
+                {
+                    var tags = tagsRaw
+                        .Split(',')
+                        .Select(t2 => t2.Trim())
+                        .Where(t2 => !string.IsNullOrEmpty(t2))
+                        .ToList();
+                    if (tags.Count > 0)
+                        noteTagTitles[note.Id] = tags;
+                }
+
                 importedNotes.Add(note);
                 count++;
             }
 
-            // Single KDBX write for the entire batch (avoids O(n) debounced saves).
-            _vm.Repository.BulkImportAsync(importedNotes).GetAwaiter().GetResult();
+            // Single KDBX write for notes + tags together.
+            _vm.Repository.BulkImportAsync(importedNotes, noteTagTitles: noteTagTitles)
+                .GetAwaiter().GetResult();
             return count;
         }
 
@@ -630,8 +649,6 @@ namespace SecureNotesWin.Views.Dialogs
                     ? Sanitize(nbName) : "Unfiled";
 
                 // ── Write attachment image files first ────────────────────────────
-                // Keep track of which attachment names we've already written so that
-                // two notes sharing the same binary name don't collide in the ZIP.
                 var writtenAttachments = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
                 foreach (var kv in note.Attachments)
                 {
@@ -646,8 +663,6 @@ namespace SecureNotesWin.Views.Dialogs
                 }
 
                 // ── Write the markdown file ───────────────────────────────────────
-                // The body already contains refs like ![alt](filename.jpg) which
-                // point at the attachment files we just wrote — no rewriting needed.
                 var mdEntry = zip.CreateEntry($"{folder}/{Sanitize(note.Title)}.md");
                 using var w = new StreamWriter(mdEntry.Open(), Encoding.UTF8);
                 w.WriteLine("---");
@@ -656,6 +671,12 @@ namespace SecureNotesWin.Views.Dialogs
                 w.WriteLine($"updated: {DateTimeOffset.FromUnixTimeMilliseconds(note.UpdatedAt):O}");
                 if (note.IsDiary) w.WriteLine("diary: true");
                 if (note.IsFavorite) w.WriteLine("favorite: true");
+
+                // ── Tags ──────────────────────────────────────────────────────────
+                var noteTags = _vm.Repository.GetTagsForNote(note.Id);
+                if (noteTags.Count > 0)
+                    w.WriteLine($"tags: {string.Join(", ", noteTags.Select(t => t.Title))}");
+
                 w.WriteLine("---");
                 w.WriteLine();
                 w.Write(note.Body);

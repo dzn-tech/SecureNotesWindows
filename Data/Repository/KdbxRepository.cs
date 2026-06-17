@@ -311,12 +311,41 @@ namespace SecureNotesWin.Data.Repository
         /// </summary>
         public async Task BulkImportAsync(
             IEnumerable<Note> notes,
-            IEnumerable<Notebook>? newNotebooks = null)
+            IEnumerable<Notebook>? newNotebooks = null,
+            Dictionary<string, List<string>>? noteTagTitles = null)
         {
             if (newNotebooks != null)
                 _notebooks.AddRange(newNotebooks);
 
             _notes.AddRange(notes);
+
+            // Wire up tags in-memory so they are persisted in the single save below.
+            // noteTagTitles maps noteId -> list of tag title strings from front-matter.
+            if (noteTagTitles != null && noteTagTitles.Count > 0)
+            {
+                foreach (var kvp in noteTagTitles)
+                {
+                    var noteId = kvp.Key;
+                    foreach (var title in kvp.Value)
+                    {
+                        if (string.IsNullOrWhiteSpace(title)) continue;
+
+                        // Reuse existing tag or create a new one in _tags.
+                        var tag = _tags.FirstOrDefault(t =>
+                            t.Title.Equals(title, StringComparison.OrdinalIgnoreCase));
+                        if (tag == null)
+                        {
+                            tag = new Tag { Title = title };
+                            _tags.Add(tag);
+                        }
+
+                        if (!_noteTags.ContainsKey(noteId))
+                            _noteTags[noteId] = new List<string>();
+                        if (!_noteTags[noteId].Contains(tag.Id))
+                            _noteTags[noteId].Add(tag.Id);
+                    }
+                }
+            }
 
             DataChanged?.Invoke(this, EventArgs.Empty);
 
