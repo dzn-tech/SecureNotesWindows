@@ -65,6 +65,8 @@
     <sys:String x:Key="Str_ImportFromJourneySub">Import Journey.cloud diary (JSON ZIP)</sys:String>
     <sys:String x:Key="Str_ImportFromDayOne">Import from DayOne</sys:String>
     <sys:String x:Key="Str_ImportFromDayOneSub">Import DayOne diary (JSON ZIP)</sys:String>
+    <sys:String x:Key="Str_ImportFromJoplinHtml">Import from Joplin (HTML)</sys:String>
+    <sys:String x:Key="Str_ImportFromJoplinHtmlSub">Import Joplin HTML export directory</sys:String>
     <sys:String x:Key="Str_Version">Version</sys:String>
     <sys:String x:Key="Str_Close">Close</sys:String>
     <sys:String x:Key="Str_BackupBookSelectorTitle">Back up which book?</sys:String>

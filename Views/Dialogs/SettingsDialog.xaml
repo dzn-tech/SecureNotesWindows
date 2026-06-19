@@ -245,7 +245,7 @@
                 </Grid>
             </Border>
 
-            <Border Background="{DynamicResource CardBrush}" CornerRadius="10" Margin="16,2,16,8" Padding="16,14"
+            <Border Background="{DynamicResource CardBrush}" CornerRadius="10" Margin="16,2,16,2" Padding="16,14"
                     Cursor="Hand" MouseLeftButtonUp="ImportDayOneRow_Click">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -264,6 +264,25 @@
                 </Grid>
             </Border>
 
+            <Border Background="{DynamicResource CardBrush}" CornerRadius="10" Margin="16,2,16,8" Padding="16,14"
+                    Cursor="Hand" MouseLeftButtonUp="ImportJoplinHtmlRow_Click">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Border Width="36" Height="36" CornerRadius="10" Background="{DynamicResource SurfaceBrush}" Margin="0,0,12,0">
+                        <TextBlock Text="🌐" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                        <TextBlock Text="{loc:Loc import_joplin_html}" FontSize="13" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}"/>
+                        <TextBlock Text="{loc:Loc import_joplin_html_sub}" FontSize="11" Foreground="{DynamicResource TextSecondaryBrush}"/>
+                    </StackPanel>
+                    <TextBlock Grid.Column="2" Text="›" FontSize="18" Foreground="{DynamicResource TextSecondaryBrush}" VerticalAlignment="Center"/>
+                </Grid>
+            </Border>
+
             <!-- ABOUT -->
             <TextBlock Text="{loc:Loc about}" FontSize="10" FontWeight="Bold"
                        Foreground="{DynamicResource AccentBrush}" Margin="24,8,24,6"/>
@@ -275,7 +294,7 @@
                     </Grid.ColumnDefinitions>
                     <TextBlock Text="{loc:Loc version}" FontSize="13" FontWeight="SemiBold"
                                Foreground="{DynamicResource TextPrimaryBrush}" VerticalAlignment="Center"/>
-                    <TextBlock Grid.Column="1" Text="1.0.0"
+                    <TextBlock Grid.Column="1" Text="1.0.12"
                                Foreground="{DynamicResource TextSecondaryBrush}" VerticalAlignment="Center"/>
                 </Grid>
             </Border>
