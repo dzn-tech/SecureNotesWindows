@@ -92,7 +92,7 @@ Supported exports:
   </tr>
   <tr>
     <td align="center">
-      <a href="https://github.com/dzn-tech/SecureNotesWindows/releases/download/v1.0.2/SecureNotesInstaller.msi">
+      <a href="https://github.com/dzn-tech/SecureNotesWindows/releases/download/v1.0.12/SecureNotesInstaller.msi">
         <img src="Screenshots/Windows.png" alt="Windows Download" width="200"/>
       </a>
     </td>
