@@ -71,6 +71,7 @@ Supported imports:
 * Day One ZIP exports
 * Journey ZIP exports
 * Joplin Markdown + Front Matter ZIP exports
+* HTML export directory
 
 ## Export
 
