@@ -98,7 +98,9 @@ Supported exports:
       </a>
     </td>
     <td align="center">
-      <img src="Screenshots/Android.png" alt="Android Coming Soon" width="200"/>
+      <a href="https://play.google.com/store/apps/details?id=com.securenotes.vault">
+        <img src="Screenshots/Android.png" alt="Android Download" width="200"/>
+      </a>
     </td>
   </tr>
 </table>
