@@ -89,17 +89,17 @@ Supported exports:
 <table>
   <tr>
     <th>Windows</th>
-    <th>Android (Coming Soon)</th>
+    <th>Android</th>
   </tr>
   <tr>
     <td align="center">
       <a href="https://github.com/dzn-tech/SecureNotesWindows/releases/download/v1.0.12/SecureNotesInstaller.msi">
-        <img src="Screenshots/Windows.png" alt="Windows Download" width="200"/>
+        <img src="Screenshots/Windows.png" alt="Windows Download" width="400"/>
       </a>
     </td>
     <td align="center">
       <a href="https://play.google.com/store/apps/details?id=com.securenotes.vault">
-        <img src="Screenshots/Android.png" alt="Android Download" width="200"/>
+        <img src="Screenshots/Android.png" alt="Android Download" width="400"/>
       </a>
     </td>
   </tr>
